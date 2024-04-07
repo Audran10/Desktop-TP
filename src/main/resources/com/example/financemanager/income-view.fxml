@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="960.0" prefWidth="1460.0"
             stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            fx:controller="com.example.financemanager.controller.ExpenseController">
+            fx:controller="com.example.financemanager.controller.IncomeController">
     <top>
         <fx:include source="header.fxml"/>
     </top>
     <center>
         <VBox spacing="10" styleClass="background-pane">
             <HBox alignment="CENTER">
-                <Label styleClass="title-text" text="Tableau récapitulatif des dépenses"/>
+                <Label styleClass="title-text" text="Tableau récapitulatif des revenus"/>
             </HBox>
             <VBox>
-                <TableView fx:id="expenseTable">
+                <TableView fx:id="incomeTable">
                     <columns>
                         <TableColumn editable="false" text="Période">
                             <cellValueFactory>
@@ -29,34 +29,24 @@
                                 <PropertyValueFactory property="total"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn editable="false" text="Logement">
+                        <TableColumn editable="false" text="Salaire">
                             <cellValueFactory>
-                                <PropertyValueFactory property="housing"/>
+                                <PropertyValueFactory property="salary"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn editable="false" text="Nourriture">
+                        <TableColumn editable="false" text="Aides">
                             <cellValueFactory>
-                                <PropertyValueFactory property="food"/>
+                                <PropertyValueFactory property="help"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn editable="false" text="Sorties">
+                        <TableColumn editable="false" text="Auto-entreprise">
                             <cellValueFactory>
-                                <PropertyValueFactory property="goingOut"/>
+                                <PropertyValueFactory property="auto_business"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn editable="false" text="Transport">
+                        <TableColumn editable="false" text="Revenus passifs">
                             <cellValueFactory>
-                                <PropertyValueFactory property="transportation"/>
-                            </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn editable="false" text="Voyage">
-                            <cellValueFactory>
-                                <PropertyValueFactory property="travel"/>
-                            </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn editable="false" text="Impôts">
-                            <cellValueFactory>
-                                <PropertyValueFactory property="tax"/>
+                                <PropertyValueFactory property="passive_income"/>
                             </cellValueFactory>
                         </TableColumn>
                         <TableColumn editable="false" text="Autres">
@@ -71,7 +61,7 @@
                 </TableView>
             </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="20.0" BorderPane.alignment="CENTER">
-                <Button text="Ajouter" onAction="#addExpense"/>
+                <Button text="Ajouter" onAction="#addIncome"/>
             </HBox>
         </VBox>
     </center>

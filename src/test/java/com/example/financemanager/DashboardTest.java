@@ -2,6 +2,7 @@ package com.example.financemanager;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ChoiceBox;
@@ -19,6 +20,7 @@ import org.testfx.robot.Motion;
 import org.testfx.util.NodeQueryUtils;
 import org.testfx.util.WaitForAsyncUtils;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -58,6 +60,7 @@ public class DashboardTest {
             verifyThat(menu, MenuItemMatchers.hasText("Navigation"));
             verifyThat(menu.getItems().get(0), MenuItemMatchers.hasText("Tableau de bord"));
             verifyThat(menu.getItems().get(1), MenuItemMatchers.hasText("Dépenses"));
+            verifyThat(menu.getItems().get(2), MenuItemMatchers.hasText("Revenus"));
         });
     }
 
@@ -70,6 +73,17 @@ public class DashboardTest {
         robot.clickOn("Dépenses", Motion.VERTICAL_FIRST, MouseButton.PRIMARY);
 
         verifyThat(".title-text", hasText("Tableau récapitulatif des dépenses"));
+    }
+
+    @Test
+    public void shouldGoToIncomesWhenClickOnMenu(FxRobot robot) throws TimeoutException {
+        robot.clickOn("Navigation");
+
+        WaitForAsyncUtils.waitFor(2, TimeUnit.SECONDS, () -> robot.lookup("Revenus").match(NodeQueryUtils.isVisible()).tryQuery().isPresent());
+
+        robot.clickOn("Revenus", Motion.VERTICAL_FIRST, MouseButton.PRIMARY);
+
+        verifyThat(".title-text", hasText("Tableau récapitulatif des revenus"));
     }
 
     @Test
@@ -101,5 +115,9 @@ public class DashboardTest {
         verifyThat("#lineChart", isVisible());
 
         assertThat(robot.lookup("#lineChart").queryAs(LineChart.class).getTitle(), equalTo("Évolution des dépenses"));
+
+        verifyThat("#barChart", isVisible());
+
+        assertThat(robot.lookup("#barChart").queryAs(BarChart.class).getTitle(), equalTo("Mes dépenses VS mes revenus"));
     }
 }

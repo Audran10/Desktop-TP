@@ -67,9 +67,24 @@ public class Database {
                      );
                    """;
 
+        String createIncomeTable =
+                """
+                        CREATE TABLE IF NOT EXISTS income(
+                             date TEXT NOT NULL,
+                             salary REAL NOT NULL,
+                             help REAL NOT NULL,
+                             autoBusiness REAL NOT NULL,
+                             passiveIncome REAL NOT NULL,
+                             other REAL NOT NULL
+                      );
+                    """;
+
         try (Connection connection = Database.connect()) {
             PreparedStatement statement = connection.prepareStatement(createTables);
             statement.executeUpdate();
+
+            PreparedStatement incomeStatement = connection.prepareStatement(createIncomeTable);
+            incomeStatement.executeUpdate();
             return true;
         } catch (SQLException exception) {
             log.error("Could not create tables in database", exception);
